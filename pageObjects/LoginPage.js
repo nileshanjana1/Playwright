@@ -1,0 +1,23 @@
+const exp = require("constants");
+
+class LoginPage {
+    constructor(page){
+        this.page = page;
+        this.signInBtn = page.locator("[value='Login']");
+        this.userName = page.locator('#userEmail');
+        this.password = page.locator("#userPassword");
+        
+    }
+
+    async goTo() {
+        await this.page.goto('https://rahulshettyacademy.com/client/');
+    }
+
+    async validLogin(username, password){
+    await this.userName.fill(username);
+    await this.password.fill(password);
+    await this.signInBtn.click();
+    this.page.waitForLoadState('networkidle');
+    }
+}
+module.exports = {LoginPage};
